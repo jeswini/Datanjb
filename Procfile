@@ -1,0 +1,1 @@
+web: gunicorn DataSourceDjangoAPI.wsgi --log-file -
