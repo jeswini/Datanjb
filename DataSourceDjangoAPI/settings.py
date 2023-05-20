@@ -31,7 +31,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = ['https://datasourcenj.herokuapp.com/', ' http://127.0.0.1:8000/']
+ALLOWED_HOSTS = ['datasourcenj.herokuapp.com/', '127.0.0.1:8000/']
 
 
 # Application definition
