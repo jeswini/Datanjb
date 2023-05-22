@@ -54,11 +54,11 @@ INSTALLED_APPS = [
 #     '127.0.0.1'
 #     # Add other allowed origins as needed
 # ]
-# CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = True
 #to whilelist only specific url so that only they can consume my apis
-CORS_ORIGIN_WHITELIST = ('https://google.com'
-                        'http://localhost:4200'
-                        'https://jeswini.github.io/dnj/')
+# CORS_ORIGIN_WHITELIST = ('https://google.com'
+#                         'http://localhost:4200'
+#                         'https://jeswini.github.io/dnj/')
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
