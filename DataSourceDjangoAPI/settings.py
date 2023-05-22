@@ -56,7 +56,7 @@ INSTALLED_APPS = [
 # ]
 # CORS_ORIGIN_ALLOW_ALL = True
 #to whilelist only specific url so that only they can consume my apis
-CORS_ORIGIN_WHITLIST = ('https://google.com'
+CORS_ORIGIN_WHITELIST = ('https://google.com'
                         'http://localhost:4200'
                         'https://jeswini.github.io/dnj/')
 
