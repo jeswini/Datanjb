@@ -32,11 +32,23 @@ def actionApi(request):
 
         # merge action
         if actionName == "Merge":
+            jsonData = data["jsonData"]
             fileList = data["fileList"]
             mergeColumn = data["mergeColumn"]
+
+            df_content_list = []
+            for val in jsonData:
+                df_content_list.append(json.loads(val))
+
+
+            # dataframes = []
+            # for fileName in fileList:
+            #     dataFile = pd.read_csv(fileName)
+            #     dataframes.append(dataFile)
+
             dataframes = []
-            for fileName in fileList:
-                dataFile = pd.read_csv(fileName)
+            for json_object in df_content_list:
+                dataFile = pd.json_normalize(json_object)
                 dataframes.append(dataFile)
 
             mergeData = dataframes[0]
@@ -55,10 +67,10 @@ def actionApi(request):
         if actionName == "Sort":
             jsonData = data["jsonData"]
             json_object = json.loads(jsonData)
-            dataFile = pd.json_normalize(json_object)
             sortColumnNames = data["sortColumnNames"]
             fileNamePath = data["fileList"][0]
-            dataFile = pd.read_csv(fileNamePath)
+            # dataFile = pd.read_csv(fileNamePath)
+            dataFile = pd.json_normalize(json_object)
             sortedData = dataFile.sort_values(by=sortColumnNames, kind='mergesort')
 
             result = sortedData.to_json(orient="records")
@@ -71,9 +83,9 @@ def actionApi(request):
             print(jsonData)
             projectColumns = data["projectColumns"]
             json_object = json.loads(jsonData)
-            dataFile = pd.json_normalize(json_object)
             fileNamePath = data["fileList"][0]
-            dataFile = pd.read_csv(fileNamePath)
+            # dataFile = pd.read_csv(fileNamePath)
+            dataFile = pd.json_normalize(json_object)
             selectedData = pd.DataFrame(dataFile, columns=projectColumns)
             result = selectedData.to_json(orient="records")
             message = json.loads(result)
@@ -82,9 +94,9 @@ def actionApi(request):
         if actionName == "Encode":
             jsonData = data["jsonData"]
             json_object = json.loads(jsonData)
-            # dataFile = pd.json_normalize(json_object)
             fileNamePath = data["fileList"][0]
-            dataFile = pd.read_csv(fileNamePath)
+            # dataFile = pd.read_csv(fileNamePath)
+            dataFile = pd.json_normalize(json_object)
             encodingColumns = data["encodingColumns"]
             labelencoder = LabelEncoder()
 
@@ -211,10 +223,13 @@ def actionApi(request):
             message = response
 
         if actionName == "UPPERCASE":
+            jsonData = data["jsonData"]
+            json_object = json.loads(jsonData)
             sortColumnNames = data["sortColumnNames"]
             print(sortColumnNames)
             fileNamePath = data["fileList"][0]
-            dataFile = pd.read_csv(fileNamePath)
+            # dataFile = pd.read_csv(fileNamePath)
+            dataFile = pd.json_normalize(json_object)
 
             # Capitalize the Values
             for column_name in sortColumnNames:
@@ -224,10 +239,13 @@ def actionApi(request):
             message = json.loads(result)
 
         if actionName == "lowercase":
+            jsonData = data["jsonData"]
+            json_object = json.loads(jsonData)
             sortColumnNames = data["sortColumnNames"]
             print(sortColumnNames)
             fileNamePath = data["fileList"][0]
-            dataFile = pd.read_csv(fileNamePath)
+            # dataFile = pd.read_csv(fileNamePath)
+            dataFile = pd.json_normalize(json_object)
 
             # Capitalize the Values
             for column_name in sortColumnNames:
