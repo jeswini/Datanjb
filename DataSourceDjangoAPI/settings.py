@@ -31,7 +31,9 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = ['datasourcenj.herokuapp.com', '127.0.0.1:8000/']
+ALLOWED_HOSTS = ['localhost','datasourcenj.herokuapp.com']
+# 'localhost' , 'datasourcenj.herokuapp.com'
+
 
 
 # Application definition
@@ -47,17 +49,23 @@ INSTALLED_APPS = [
     'ActionApp.apps.ActionappConfig',
     'rest_framework'
 ]
-
-CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ALLOWED_ORIGINS = [
+#     'https://jeswini.github.io/dnj',
+#     '127.0.0.1'
+#     # Add other allowed origins as needed
+# ]
+# CORS_ORIGIN_ALLOW_ALL = True
 #to whilelist only specific url so that only they can consume my apis
-#CORS_ORIGIN_WHITLIST = ('https://google.com')
+CORS_ORIGIN_WHITLIST = ('https://google.com'
+                        'http://localhost:4200'
+                        'https://jeswini.github.io/dnj/')
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
